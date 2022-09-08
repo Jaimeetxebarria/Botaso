@@ -15,12 +15,18 @@ module.exports = {
             return;
         }
 
-        const yearsMenu = new SelectMenuBuilder()
+        const gamesMenu = new SelectMenuBuilder()
             .setCustomId("gamesMenu")
-            .setMinValues(1)
-            .setMaxValues(3)
+            .setMaxValues(4)
+            .setMinValues(0)
             .setPlaceholder("¿A qué juegas?")
             .setOptions(
+                {
+                    label: "De todo un poco",
+                    description: "Acceso a toda la zona de gaming sin pingeos",
+                    value: "1017468559938568302",
+                    emoji: "🕹️",
+                },
                 {
                     label: "League of Legends",
                     value: "1014272702539911310",
@@ -40,8 +46,7 @@ module.exports = {
         interaction.deferReply();
         interaction.deleteReply();
         await client.channels.cache.get(process.env.roles_channel_id).send({
-            //Deusto: 1014280551395508324
-            components: [new ActionRowBuilder().addComponents(yearsMenu)],
+            components: [new ActionRowBuilder().addComponents(gamesMenu)],
         });
     },
 };

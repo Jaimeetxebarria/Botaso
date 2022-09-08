@@ -3,6 +3,7 @@ module.exports = {
         customId: "degreesMenu",
     },
     async execute(interaction, client) {
+        interaction.deferUpdate();
         chosenRoleID = interaction.values[0];
         const roleIDs = [
             "1014211136259895376",
@@ -19,6 +20,6 @@ module.exports = {
             if (interaction.member.roles.cache.has(roleID))
                 await interaction.member.roles.remove(roleID);
         }
-        interaction.deferUpdate();
+        //interaction.deferUpdate();
     },
 };

@@ -4,10 +4,11 @@ module.exports = {
     async execute(interaction, client) {
         if (interaction.isChatInputCommand()) {
             const command = client.commands.get(interaction.commandName);
-            if (!command) return;
+            if (!command) return new Error("Este comando no existe");
             try {
                 await command.execute(interaction, client);
             } catch (error) {
+                console.log("Command error");
                 console.error(error);
                 await interaction.reply({
                     content: "Ha habido un error al ejecutar el comando :(",

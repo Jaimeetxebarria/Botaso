@@ -3,6 +3,7 @@ module.exports = {
         customId: "yearsMenu",
     },
     async execute(interaction, client) {
+        interaction.deferUpdate();
         chosenRoleID = interaction.values[0];
         const roleIDs = [
             "1014493019245916190",
@@ -18,6 +19,6 @@ module.exports = {
             if (interaction.member.roles.cache.has(roleID))
                 await interaction.member.roles.remove(roleID);
         }
-        interaction.deferUpdate();
+        //interaction.deferUpdate();
     },
 };
