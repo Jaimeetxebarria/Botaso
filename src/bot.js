@@ -1,4 +1,3 @@
-// Require the necessary discord.js classes
 require("dotenv").config();
 require("colors");
 const fs = require("node:fs");
@@ -30,5 +29,5 @@ for (const folder of functionFolders) {
 client.handleEvents();
 client.handleCommands();
 client.handleComponents();
-//console.log(process.env.DISCORD_TOKEN);
+
 client.login(process.env.DISCORD_TOKEN);

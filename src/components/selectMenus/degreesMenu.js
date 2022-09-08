@@ -20,6 +20,5 @@ module.exports = {
             if (interaction.member.roles.cache.has(roleID))
                 await interaction.member.roles.remove(roleID);
         }
-        //interaction.deferUpdate();
     },
 };
