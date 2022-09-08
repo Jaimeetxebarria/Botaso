@@ -13,6 +13,7 @@ module.exports = {
         setInterval(setRandomActivity, 60000);
 
         client.channels.cache
+
             .get(process.env.roles_channel_id)
             .messages.fetch(process.env.games_menu_id)
             .then((msg) => {
