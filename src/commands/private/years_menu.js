@@ -23,29 +23,28 @@ module.exports = {
             .setOptions(
                 {
                     label: "1º",
-                    value: "1014493019245916190",
+                    value: process.env.year_1_id,
                 },
                 {
                     label: "2º",
-                    value: "1014493106109952080",
+                    value: process.env.year_2_id,
                 },
                 {
                     label: "3º",
-                    value: "1014493145079226458",
+                    value: process.env.year_3_id,
                 },
                 {
                     label: "4º",
-                    value: "1014493183448711229",
+                    value: process.env.year_4_id,
                 },
                 {
                     label: "5º",
-                    value: "1014493288788668496",
+                    value: process.env.year_5_id,
                 }
             );
         interaction.deferReply();
         interaction.deleteReply();
         await client.channels.cache.get(process.env.roles_channel_id).send({
-            //Deusto: 1014280551395508324
             components: [new ActionRowBuilder().addComponents(yearsMenu)],
         });
     },

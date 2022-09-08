@@ -33,6 +33,5 @@ module.exports = {
             embeds: [embed],
             components: [new ActionRowBuilder().addComponents(suggestionButton)],
         });
-        //Deusto: 1016851284256624740
     },
 };

@@ -5,10 +5,10 @@ module.exports = {
     async execute(interaction, client) {
         interaction.deferUpdate();
         const roleIDs = [
-            "1017468559938568302",
-            "1014272702539911310",
-            "1014272930412236831",
-            "1014291200871768186",
+            process.env.gaming_id,
+            process.env.league_of_legends_id,
+            process.env.valorant_id,
+            process.env.rainbow_six_id,
         ];
 
         for (const roleID of roleIDs) {

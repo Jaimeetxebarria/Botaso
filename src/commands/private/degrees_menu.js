@@ -23,27 +23,27 @@ module.exports = {
             .setOptions(
                 {
                     label: "Ingeniería Informática",
-                    value: "1014211136259895376",
+                    value: process.env.ingenieria_informatica_id,
                 },
                 {
                     label: "Ciencia de Datos e Inteligencia Artificial",
-                    value: "1014211299430907955",
+                    value: process.env.ciencia_de_datos_id,
                 },
                 {
                     label: "Ingeniería Informática + Ciencia de Datos e IA",
-                    value: "1015821057237729290",
+                    value: process.env.informatica_ciencia_datos_id,
                 },
                 {
                     label: "Ingeniería Informática + Videojuegos, RV y RA",
-                    value: "1014213621187891210",
+                    value: process.env.informatica_videojuegos_id,
                 },
                 {
                     label: "Ingeniería Informática + Transformación Digital de la Empresa",
-                    value: "1014212148022489168",
+                    value: process.env.informatica_TDE_id,
                 },
                 {
                     label: "Ingeniería Informática + ADE",
-                    value: "1014408582227312700",
+                    value: process.env.informatica_ADE_id,
                 }
             );
         interaction.deferReply();

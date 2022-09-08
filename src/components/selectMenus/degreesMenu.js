@@ -6,12 +6,12 @@ module.exports = {
         interaction.deferUpdate();
         chosenRoleID = interaction.values[0];
         const roleIDs = [
-            "1014211136259895376",
-            "1015821057237729290",
-            "1014213621187891210",
-            "1014212148022489168",
-            "1014211299430907955",
-            "1014408582227312700",
+            process.env.ingenieria_informatica_id,
+            process.env.ciencia_de_datos_id,
+            process.env.informatica_ciencia_datos_id,
+            process.env.informatica_videojuegos_id,
+            process.env.informatica_TDE_id,
+            process.env.informatica_ADE_id,
         ];
         await interaction.member.roles.add(interaction.values[0]);
 
