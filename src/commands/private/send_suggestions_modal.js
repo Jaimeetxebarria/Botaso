@@ -29,7 +29,7 @@ module.exports = {
         interaction.deferReply();
         interaction.deleteReply();
 
-        await client.channels.cache.get("1014260291254624376").send({
+        await client.channels.cache.get(process.env.suggestions_channel_id).send({
             embeds: [embed],
             components: [new ActionRowBuilder().addComponents(suggestionButton)],
         });

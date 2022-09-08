@@ -10,7 +10,6 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName("encuesta")
         .setDescription("Crea una encuesta")
-        .setDefaultMemberPermissions(0)
         .addStringOption((option) =>
             option
                 .setName("título")
@@ -49,16 +48,6 @@ module.exports = {
         ),
 
     async execute(interaction, client) {
-        console.log(
-            interaction.options.get("título").value,
-            interaction.options.get("opctiones")?.value ?? [
-                new PollOption("Sí"),
-                new PollOption("No"),
-            ],
-            interaction.options.get("duración")?.value ?? Infinity,
-            interaction.options.get("roles_permitidos")?.value ?? "everyone",
-            interaction.options.get("múltiples_votos")?.value ?? false
-        );
         let poll = new Poll();
         poll.initPoll(
             interaction.options.get("título").value,
@@ -82,6 +71,8 @@ function getTimeInSecFromFormattedTime(time) {
         d: 86400,
     };
     const matches = time.toLowerCase().match(/\d+[dhms]/g);
+    if (matches === null) return undefined;
+
     const sum = matches.reduce(
         (accumulator, match) =>
             accumulator + parseFloat(match.slice(0, -1)) * symbols[match.slice(-1)],
@@ -106,6 +97,15 @@ class Poll {
 
         //Manage duration. Convert formatted time into seconds.Example: 5m = 300
         this.duration = duration === Infinity ? Infinity : getTimeInSecFromFormattedTime(duration);
+
+        if (this.duration === undefined) {
+            interaction.reply({
+                content: `El formato de tiempo que has puesto en la duración de la encuesta no es correcto :'(\nEjemplos correctos: 10 minutos -> 10m, hora y media -> 1h30m.\nPuedes usar: "s" (segundos), "m" (minutos), "h" (horas) y "d" (días)`,
+                ephemeral: true,
+            });
+            return;
+        }
+
         const startTime = Math.trunc(Date.now() / 1000);
 
         //Manage options
@@ -257,7 +257,7 @@ class Poll {
             );
             //If this poll has an option named the same as other poll but with different ID it wont
             if (button === undefined) return;
-            console.log("button data" + button.data.custom_id.toString());
+            //console.log("button data" + button.data.custom_id.toString());
             const voteOption = this.votes[button.data.label];
 
             //When multiple votes are enabled
@@ -271,6 +271,7 @@ class Poll {
                     this.votes[button.data.label].push(interaction.member.id);
                 }
                 this.updateEmbed();
+                interaction.deferUpdate();
                 await this.pollInteraction.edit({
                     embeds: [this.pollEmbed],
                     components: [this.buttons],
@@ -284,6 +285,7 @@ class Poll {
                 });
                 this.votes[button.data.label].push(interaction.member.id);
                 this.updateEmbed();
+                interaction.deferUpdate();
                 await this.pollInteraction.edit({
                     embeds: [this.pollEmbed],
                     components: [this.buttons],

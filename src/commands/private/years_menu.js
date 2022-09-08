@@ -44,7 +44,7 @@ module.exports = {
             );
         interaction.deferReply();
         interaction.deleteReply();
-        await client.channels.cache.get("1014260291254624376").send({
+        await client.channels.cache.get(process.env.roles_channel_id).send({
             //Deusto: 1014280551395508324
             components: [new ActionRowBuilder().addComponents(yearsMenu)],
         });

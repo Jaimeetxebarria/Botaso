@@ -42,7 +42,7 @@ module.exports = {
             },
         ];
 
-        await client.channels.cache.get("1014260291254624376").send({ embeds: normasEmbed }); //Deusto normas: 1014208965158121575
+        await client.channels.cache.get(process.env.rules_channel_id).send({ embeds: normasEmbed }); //Deusto normas: 1014208965158121575
         await interaction.deferReply();
         await interaction.deleteReply();
     },
