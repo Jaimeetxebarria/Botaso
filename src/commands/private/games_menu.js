@@ -17,7 +17,7 @@ module.exports = {
 
         const gamesMenu = new SelectMenuBuilder()
             .setCustomId("gamesMenu")
-            .setMaxValues(4)
+            .setMaxValues(9)
             .setMinValues(0)
             .setPlaceholder("¿A qué juegas?")
             .setOptions(
@@ -41,6 +41,31 @@ module.exports = {
                     label: "Rainbow Six",
                     value: process.env.rainbow_six_id,
                     emoji: "1014291034865414206",
+                },
+                {
+                    label: "Minecraft",
+                    value: process.env.minecraft_id,
+                    emoji: "1017798914893676675",
+                },
+                {
+                    label: "CSGO",
+                    value: process.env.CSGO_id,
+                    emoji: "1017800365653102692",
+                },
+                {
+                    label: "Factorio",
+                    value: process.env.factorio_id,
+                    emoji: "1017410575455760474",
+                },
+                {
+                    label: "FIFA",
+                    value: process.env.FIFA_id,
+                    emoji: "1017803659100311632",
+                },
+                {
+                    label: "Fortnite",
+                    value: process.env.fortnite_id,
+                    emoji: "1017803094823800922",
                 }
             );
         interaction.deferReply();

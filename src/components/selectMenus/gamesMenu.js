@@ -9,15 +9,21 @@ module.exports = {
             process.env.league_of_legends_id,
             process.env.valorant_id,
             process.env.rainbow_six_id,
+            process.env.minecraft_id,
+            process.env.CSGO_id,
+            process.env.factorio_id,
+            process.env.FIFA_id,
+            process.env.fortnite_id,
         ];
 
         for (const roleID of roleIDs) {
-            if (interaction.member.roles.cache.has(roleID))
+            if (interaction.values.includes(roleID)) {
+                await interaction.member.roles.add(roleID);
+                continue;
+            }
+            if (interaction.member.roles.cache.has(roleID)) {
                 await interaction.member.roles.remove(roleID);
-        }
-
-        for (const roleID of interaction.values) {
-            await interaction.member.roles.add(roleID);
+            }
         }
     },
 };
