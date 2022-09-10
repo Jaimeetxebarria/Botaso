@@ -19,9 +19,7 @@ module.exports = {
         for (const roleID of roleIDs) {
             if (interaction.values.includes(roleID)) {
                 await interaction.member.roles.add(roleID);
-                continue;
-            }
-            if (interaction.member.roles.cache.has(roleID)) {
+            } else if (interaction.member.roles.cache.has(roleID)) {
                 await interaction.member.roles.remove(roleID);
             }
         }

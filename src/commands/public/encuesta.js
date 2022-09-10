@@ -51,7 +51,7 @@ module.exports = {
         let poll = new Poll();
         poll.initPoll(
             interaction.options.get("título").value,
-            interaction.options.get("opctiones")?.value ?? [
+            interaction.options.get("opciones")?.value ?? [
                 new PollOption("Sí"),
                 new PollOption("No"),
             ],
@@ -106,7 +106,7 @@ class Poll {
             return;
         }
 
-        const startTime = Math.trunc(Date.now() / 1000);
+        this.startTime = Math.trunc(Date.now() / 1000);
 
         //Manage options
         this.options = options;
@@ -147,7 +147,7 @@ class Poll {
         description +=
             this.duration === Infinity
                 ? ":infinity: Esta encuesta no caduca"
-                : `:hourglass: <t:${startTime + this.duration}:R>`;
+                : `:hourglass: <t:${this.startTime + this.duration}:R>`;
         description += `\n:ballot_box: ${
             this.allowedMentions === "everyone"
                 ? "@everyone puede votar"
@@ -165,12 +165,12 @@ class Poll {
         if (this.options.length === 2) {
             this.buttons.addComponents(
                 new ButtonBuilder()
-                    .setCustomId(this.options[0].name + startTime.toString())
+                    .setCustomId(this.options[0].name + this.startTime.toString())
                     .setLabel(this.options[0].name)
                     .setStyle(ButtonStyle.Primary)
                     .setEmoji("🗳"),
                 new ButtonBuilder()
-                    .setCustomId(this.options[1].name + startTime.toString())
+                    .setCustomId(this.options[1].name + this.startTime.toString())
                     .setLabel(this.options[1].name)
                     .setStyle(ButtonStyle.Secondary)
                     .setEmoji("🗳")
@@ -181,7 +181,7 @@ class Poll {
             for (const option of this.options) {
                 this.buttons.addComponents(
                     new ButtonBuilder()
-                        .setCustomId(option.name + startTime.toString())
+                        .setCustomId(option.name + this.startTime.toString())
                         .setLabel(option.name)
                         .setStyle(ButtonStyle.Primary)
                         .setEmoji("🗳")
@@ -193,7 +193,7 @@ class Poll {
         if (this.duration === Infinity) {
             this.buttons.addComponents(
                 new ButtonBuilder()
-                    .setCustomId("close_poll" + startTime.toString())
+                    .setCustomId("close_poll" + this.startTime.toString())
                     .setLabel("Cerrar encuesta")
                     .setStyle(ButtonStyle.Danger)
             );
@@ -224,7 +224,7 @@ class Poll {
 
         voteCollector.on("collect", async (interaction) => {
             //Close poll button
-            if (interaction.customId === "close_poll" + startTime.toString()) {
+            if (interaction.customId === "close_poll" + this.startTime.toString()) {
                 if (interaction.member.id === pollAuthor.id) {
                     voteCollector.stop();
                     await this.closePoll();
@@ -340,7 +340,7 @@ class Poll {
         description +=
             this.duration === Infinity
                 ? ":infinity: Esta encuesta no caduca"
-                : `:hourglass: <t:${startTime + this.duration}:R>`;
+                : `:hourglass: <t:${this.startTime + this.duration}:R>`;
         description += `\n:ballot_box: ${
             this.allowedMentions === "everyone"
                 ? "@everyone puede votar"
