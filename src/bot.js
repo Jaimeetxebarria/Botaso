@@ -5,13 +5,16 @@ const { Client, Collection, GatewayIntentBits } = require("discord.js");
 
 const client = new Client({
     intents: [
-        GatewayIntentBits.DirectMessages,
         GatewayIntentBits.Guilds,
         GatewayIntentBits.GuildBans,
+        GatewayIntentBits.GuildMembers,
         GatewayIntentBits.GuildMessages,
+        GatewayIntentBits.DirectMessages,
+        GatewayIntentBits.GuildPresences,
         GatewayIntentBits.MessageContent,
     ],
 });
+
 client.commands = new Collection();
 client.events = new Collection();
 client.selectMenus = new Collection();
